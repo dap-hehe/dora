@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>REQUEST NI KUYA FRANCIS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-image: url("doraaaaa.jpg");
+      background-repeat: repeat;
+      background-size: 150px; /* control size of repeated images */
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .button-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'Pacifico', cursive;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    #morningBtn {
+      background-color: #ff99cc;
+      color: white;
+    }
+
+    #morningBtn:hover {
+      background-color: #ff66b2;
+    }
+
+    #habibiBtn,
+    #floatingHabibi {
+      background-color: #b388ff;
+      color: white;
+    }
+
+    #habibiBtn:hover,
+    #floatingHabibi:hover {
+      background-color: #9e70ff;
+      transform: scale(1.1);
+    }
+
+    /* Custom dialog */
+    #questionBox {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 300px;
+      z-index: 100;
+    }
+
+    #questionBox p {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    #questionBox button {
+      background-color: #ff66b2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 15px;
+      font-family: 'Quicksand', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #questionBox button:hover {
+      background-color: #ff4081;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Buttons -->
+  <div class="button-container" id="buttonContainer">
+    <button id="morningBtn" onclick="startConfirmation()">Good Morning</button>
+    <button id="habibiBtn" onclick="detachAndMoveHabibi()">Habibi</button>
+  </div>
+
+  <!-- Custom popup question box -->
+  <div id="questionBox">
+    <p id="questionText">Are you ready to make a life-changing decision?</p>
+    <button onclick="nextQuestion()">Yes</button>
+  </div>
+
+  <script>
+    const facebookURL = "https://www.facebook.com/angelmitsuki.talledo.31?mibextid=wwXIfr&rdid=KiklOAyuuSk1GX93&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1HeBHXNZzY%2F%3Fmibextid%3DwwXIfr#";
+
+    const questions = [
+      "Sigurado ka ba diyan bossing?",
+      "Baka pagsisihan mo kapag tinuloy mo pa. Sureness ba iyarnnn?",
+      "Kaya mo bang mabuhay pa kapag pinili mo to????",
+      "Baka malasoinn kaaaa? ",
+      "AHHHHHHHHHHHHH WAGGGGGG PLEASSSSSEEEE!!!!",
+      "ISA PA MALALAMAN MO NA SINO IDOL KO!!"
+    ];
+
+    let questionIndex = 0;
+
+    function startConfirmation() {
+      questionIndex = 0;
+      document.getElementById("questionText").innerText = questions[questionIndex];
+      document.getElementById("questionBox").style.display = "block";
+    }
+
+    function nextQuestion() {
+      questionIndex++;
+      if (questionIndex < questions.length) {
+        document.getElementById("questionText").innerText = questions[questionIndex];
+      } else {
+        window.location.href = facebookURL;
+      }
+    }
+
+    function detachAndMoveHabibi() {
+      const habibiBtn = document.getElementById("habibiBtn");
+
+      const newBtn = habibiBtn.cloneNode(true);
+      newBtn.id = "floatingHabibi";
+      newBtn.onclick = moveHabibi;
+      newBtn.style.position = "absolute";
+      newBtn.style.zIndex = "2";
+      newBtn.style.backgroundColor = "#b388ff";
+      newBtn.style.color = "white";
+      newBtn.style.border = "none";
+      newBtn.style.borderRadius = "25px";
+      newBtn.style.padding = "15px 30px";
+      newBtn.style.fontSize = "20px";
+      newBtn.style.fontFamily = "'Pacifico', cursive";
+      newBtn.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";
+      newBtn.style.transition = "all 0.3s ease";
+
+      habibiBtn.remove();
+      document.body.appendChild(newBtn);
+      moveHabibi();
+    }
+
+    function moveHabibi() {
+      const btn = document.getElementById("floatingHabibi");
+
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      const btnWidth = btn.offsetWidth;
+      const btnHeight = btn.offsetHeight;
+
+      const newX = Math.floor(Math.random() * (windowWidth - btnWidth));
+      const newY = Math.floor(Math.random() * (windowHeight - btnHeight));
+
+      btn.style.left = `${newX}px`;
+      btn.style.top = `${newY}px`;
+    }
+  </script>
+
+</body>
+</html>
